@@ -16,8 +16,10 @@ end_row = "79";
 
 num_replicates = 3;
 
+time_start_col = "A";
+
 % Only cells with data for range
-time = xlsread(filepath, "Time", start_col + start_row + ":" + start_col + end_row);
+time = xlsread(filepath, "Time", time_start_col + start_row + ":" + time_start_col + end_row);
 [~, legend_text, ~] = xlsread(filepath, "Legend", start_col + start_row + ":" + end_col + start_row);
 [~, colour_codes, ~] = xlsread(filepath, "Colours", start_col + start_row + ":" + end_col + start_row);
 
