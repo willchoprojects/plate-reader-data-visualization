@@ -4,7 +4,7 @@ clear
 close all
 clc
 
-filename = "01-28-22 LacIP sensors plate reader S7 LB.xlsx";
+filename = "sample_data.xlsx";
 filepath = "data/" + filename;
 
 %% Data Import

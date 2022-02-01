@@ -1,5 +1,7 @@
 # Data Files
-data/
+!data
+data/*
+!data/sample_data.xlsx
 
 # Windows default autosave extension
 *.asv
