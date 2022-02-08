@@ -140,3 +140,4 @@ plot_average_data(cfp_od, yfp_od, true, true, num_replicates, 'Average YFP/OD vs
 yfp_cfp = yfp_data./cfp_data;
 
 plot_average_data(od_data, yfp_cfp, true, true, num_replicates, 'Average YFP/OD/CFP/OD vs Average OD', 'Average OD', 'Average YFP/OD/CFP/OD', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
+xlim([0.17 1.3])
