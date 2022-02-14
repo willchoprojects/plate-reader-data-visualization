@@ -4,29 +4,29 @@ clear
 close all
 clc
 
-filename = "sample_data.xlsx";
+filename = "020322 LacIP sensors plate reader S7.xlsx";
 filepath = "data/" + filename;
 
 %% Parameters
 
 % Start and end columns and rows for data in separated sheets
 start_col = "A";
-end_col = "AJ";
+end_col = "AV";
 start_row = "1";
 end_row = "79";
 
 % Number of replicates of each sample, for averaging
-num_replicates = 3;
+num_replicates = 6;
 
 % Time should always be in column A
 time_start_col = "A";
 
 % For processing data, to remove background noise for OD data and
 % fluorescence data
-od_control_data_start_col = 10;
-od_control_data_end_col = 12;
-fp_control_data_start_col = 7;
-fp_control_data_end_col = 9;
+od_control_data_start_col = 31;
+od_control_data_end_col = 36;
+fp_control_data_start_col = 43;
+fp_control_data_end_col = 48;
 
 % Processed data tends to blow up near 0 since there are divisions by
 % datapoints close to zero when the data is normalized to 0
@@ -46,7 +46,7 @@ cfp_data_raw = xlsread(filepath, "CFP435,505", start_col + start_row + ":" + end
 
 %% Data Processing
 
-removal_indices = [1 6; od_control_data_start_col od_control_data_end_col; fp_control_data_start_col fp_control_data_end_col];
+removal_indices = [od_control_data_start_col od_control_data_end_col; fp_control_data_start_col fp_control_data_end_col];
 legend_text_processed = remove_columns(legend_text_raw, removal_indices);
 colour_codes_processed = remove_columns(colour_codes_raw, removal_indices);
 od_data_processed = remove_columns(remove_background(od_data_raw, od_control_data_start_col, od_control_data_end_col, true), removal_indices);
@@ -112,7 +112,7 @@ cfp_data = reshape(cfp_data(filter_matrix), num_rows, num_cols);
 yfp_od = yfp_data./od_data;
 
 plot_replicate_data(od_data, yfp_od, num_replicates, 'RFU/OD600 vs OD600', 'OD600', 'RFU/OD600', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
-
+xlim([0.2 1.3])
 
 %% YFP/OD vs CFP/OD
 
@@ -126,6 +126,20 @@ plot_replicate_data(cfp_od, yfp_od, num_replicates, 'YFP/OD vs CFP/OD', 'CFP/OD'
 yfp_cfp = yfp_data./cfp_data;
 
 plot_replicate_data(od_data, yfp_cfp, num_replicates, 'YFP/OD/CFP/OD vs OD', 'CFP/OD', 'YFP/OD', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
+
+%% Average YFP/OD vs Average OD
+
+yfp_od = yfp_data./od_data;
+
+plot_average_data(od_data, yfp_od, true, true, num_replicates, 'Average YFP/OD vs Average OD', 'Average OD', 'Average YFP/OD', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
+xlim([0.1 1.3])
+
+%% Average YFP/OD vs Average OD
+
+yfp_od = yfp_data./od_data;
+
+plot_average_data(od_data, yfp_od, true, true, num_replicates, 'Average YFP/OD vs Average OD', 'Average OD', 'Average YFP/OD', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
+xlim([0.1 1.3])
 
 %% Average YFP/OD vs Average CFP/OD
 

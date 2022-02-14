@@ -9,14 +9,14 @@ function plot_average_data(x_data, y_data, is_displaying_x_errors, is_displaying
     labelled_curves = [];
 
     for index = 1:length(y_data_averages(1,:))
-        curr_curve = plot(x_data_averages(:, index), y_data_averages(:,index), 'LineStyle', line_style, 'Marker', marker, 'MarkerSize', marker_size, 'Color', char(plot_colours_hexcodes(index * 3)));
+        curr_curve = plot(x_data_averages(:, index), y_data_averages(:,index), 'LineStyle', line_style, 'Marker', marker, 'MarkerSize', marker_size, 'Color', char(plot_colours_hexcodes(index * num_replicates)));
 
         if (is_displaying_y_errors)
-            errorbar(x_data_averages(:, index), y_data_averages(:, index), y_data_stds(:, index), 'Color', char(plot_colours_hexcodes(index * 3)))
+            errorbar(x_data_averages(:, index), y_data_averages(:, index), y_data_stds(:, index), 'Color', char(plot_colours_hexcodes(index * num_replicates)))
         end
         
         if (is_displaying_x_errors)
-            errorbar(x_data_averages(:, index), y_data_averages(:, index), x_data_stds(:, index), 'horizontal', 'Color', char(plot_colours_hexcodes(index * 3)))
+            errorbar(x_data_averages(:, index), y_data_averages(:, index), x_data_stds(:, index), 'horizontal', 'Color', char(plot_colours_hexcodes(index * num_replicates)))
         end
        
         labelled_curves = [labelled_curves curr_curve];
