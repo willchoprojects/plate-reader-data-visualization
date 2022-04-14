@@ -1,13 +1,10 @@
-function plot_average_data(x_data, y_data, is_displaying_x_errors, is_displaying_y_errors, num_replicates, figure_title, figure_x_label, figure_y_label, legend_labels, legend_location, line_style, marker, marker_size, plot_colours_hexcodes)    
+function plot_average_data_non_figure(x_data, y_data, is_displaying_x_errors, is_displaying_y_errors, num_replicates, figure_title, figure_x_label, figure_y_label, legend_labels, legend_location, line_style, marker, marker_size, plot_colours_hexcodes)    
     [x_data_averages, x_data_stds] = congregate_data(x_data, num_replicates);
     [y_data_averages, y_data_stds] = congregate_data(y_data, num_replicates);
-
-%     figure
 
     hold on
 
     labelled_curves = [];
-
     for index = 1:length(y_data_averages(1,:))
         curr_curve = plot(x_data_averages(:, index), y_data_averages(:,index), 'LineStyle', line_style, 'LineWidth', 1.5, 'Marker', marker, 'MarkerSize', marker_size, 'Color', char(plot_colours_hexcodes(index * num_replicates)));
 
@@ -22,7 +19,7 @@ function plot_average_data(x_data, y_data, is_displaying_x_errors, is_displaying
         labelled_curves = [labelled_curves curr_curve];
     end
 
-%     title(figure_title, 'FontSize', 22)
+    title(figure_title, 'FontSize', 18)
     xlabel(figure_x_label, 'FontSize', 18)
     ylabel(figure_y_label, 'FontSize', 18)
     legend(labelled_curves, legend_labels((1:(length(y_data(1,:)) / num_replicates)) * num_replicates), 'FontSize', 16, 'Location', legend_location) 

@@ -58,7 +58,7 @@ cfp_data_processed = remove_columns(remove_background(cfp_data_raw, fp_control_d
 legend_location = 'northeast';
 line_style = 'none';
 marker_style = '.';
-marker_size = 16;
+marker_size = 8;
 
 %% Figures and Plots
 
@@ -153,5 +153,5 @@ plot_average_data(cfp_od, yfp_od, true, true, num_replicates, 'Average YFP/OD vs
 
 yfp_cfp = yfp_data./cfp_data;
 
-plot_average_data(od_data, yfp_cfp, true, true, num_replicates, 'Average YFP/OD/CFP/OD vs Average OD', 'Average OD', 'Average YFP/OD/CFP/OD', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
+plot_average_data(od_data, yfp_cfp, true, true, num_replicates, 'Average YFP/OD/CFP/OD vs Average OD', 'Average OD600', 'Average RFU', legend_text, legend_location, line_style, marker_style, marker_size, colour_codes);
 xlim([0.17 1.3])
